@@ -1,0 +1,42 @@
+<% include ../partials/header.ejs %>
+<div class="container">
+	<div class="row">
+		<h1 style="text-align: center;">Edit <%=camps.name%></h1>
+		<div style="width: 30%; margin: 20px auto;">
+			<form action="/camps/<%=camps._id%>?_method=PUT" method="POST">
+				<div class="form-group">
+					<input class="form-control" type="text" name="name" value="<%=camps.name%>">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" name="image" value="<%=camps.image%>">
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" type="textarea" name="description" style="max-width: 100%"><%=camps.description%></textarea>
+				</div>
+				<div class="form-group">
+				<div class="form-group" id="star-rating-text">
+				Leave a star-rating:
+					<div id="star-rating"> 
+							<div id="rateYo"></div>
+					</div>
+				</div>
+				<input type="hidden" name="rating" id="rating">
+				<script type="text/javascript">
+					$(function () {
+  						$("#rateYo").rateYo({
+    						rating: 0
+  						});
+					});
+					$("#rateYo").rateYo().on("rateyo.set", function (e, data) {
+						document.getElementById("rating").value=data.rating;
+					});
+				</script>
+
+					<button class="btn btn-lg btn-primary btn-block">Done!</button>
+				</div>	
+			</form>
+			<a href="/camps/<%=camps._id%>">Back</a>
+		</div>
+	</div>
+</div>
+<% include ../partials/footer.ejs %>

@@ -1,0 +1,37 @@
+<% include ../partials/header.ejs %>
+
+<div class = "container">
+	<div class="jumbotron">
+		<div class="container">
+			<%if(!user) {%>
+				<h1><i class="icon-campfire"></i>Welcome to Yamp!</h1>
+			<%} else {%>
+				<h1><i class="icon-campfire"></i>Welcome to Yamp, <%= user.username %>!</h1>
+			<%}%>
+			<p>a camping yelp.</p>
+			<a class="btn btn-primary btn-large" href="/camps/new">Add a new camp</a>
+		</div>
+	</div>
+
+    <%if (Object.keys(camps).length > 0) {%>	        
+        <h3 style="margin-left: 15px; padding-bottom: 10px;">Some popular camping listings:</h3>
+   <% } %>
+    
+<div class="row text-center">
+	<div class="col-lg-12">
+		<% camps.forEach(function(camp){ %>
+			<div class="col-md-3 col-sm-6">
+				<div class="thumbnail">
+					<div class="caption">
+						<h3><%= camp.name%>	</h3>
+					</div>
+					<a href="<%= camp.image %>"><img src="<%= camp.image %>"></a>
+					<a href="/camps/<%= camp._id %>" class="btn btn-info" style="margin-top: 6px;">Explore!</a>
+				</div>
+			</div>
+		<% }); %> 
+	</div>
+</div>
+
+</div>
+<% include ../partials/footer.ejs %>
